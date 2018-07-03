@@ -1,0 +1,39 @@
+version: "3"
+services:
+
+  sugar:
+    container_name: "sugar-web"
+    image: sugar65_apache
+    build: apache 
+    ports:
+      - "80:80"
+    extra_hosts:
+      - "docker.local:127.0.0.1"
+    volumes:
+      - ./www:/var/www/html
+    depends_on:
+      - mysql
+      - permissions
+    links:
+      - mysql
+
+  mysql:
+    container_name: "sugar-mysql"
+    image: mysql:5.5
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=sugar
+      - MYSQL_PASSWORD=sugar
+    volumes:
+      - ./mysql/conf/mysql.conf:/etc/mysql/conf.d/mysql.conf
+      - ./data/mysql:/var/lib/mysql
+
+  permissions:
+    container_name: "sugar-permissions"
+    image: heckie-permissions:latest
+    build: heckie-permissions
+    volumes:
+      - ./www:/var/www/html
+
