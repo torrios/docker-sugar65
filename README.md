@@ -33,11 +33,6 @@ docker-compose up --build -d
 
 which will start the containers in the background. 
 
-### Contribution guidelines ###
-
-Well, this will probably never see the light of
-day and so probably no one will contribute here.
-
 ### Who do I talk to? ###
 
 * That would be me...Hector Rios
